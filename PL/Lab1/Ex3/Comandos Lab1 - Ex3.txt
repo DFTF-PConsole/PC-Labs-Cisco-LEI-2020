@@ -1,0 +1,36 @@
+Comandos & Instrucoes - Lab1 - Ex3
+
+NOTA PREVIA: Valor de X (Aula) = ? | Valor de N (Grupo) = 5
+
+
+>>> CONFIGURACAO VIRTUAL
+A. Configuracoes Router:
+config t						## equivalente a "configure terminal" ou "config terminal"?
+service dhcp
+ip dhcp pool GRUPO-5					## 5 -> N. do Grupo
+lease 0 0 2						## lease time 2 minutos
+exit
+end
+
+
+
+>>> OBRIGAR O PC A OBTER A NOVA CONFIGURACAO
+A. NO PC 
+1. Abrir Linha de Comandos do Windows (cmd) e Executar o seguinte:
+ipconfig /release
+ipconfig /renew
+
+2. Ver o "Lease Obtained" e "Lease Expires" na seccao Ethernet Adapter
+ipconfig /all
+
+
+
+>>> OBTER, ANALISAR E INTERPRETAR RESULTADOS
+A. No terminal do router:
+1. Comandos:
+debug ip dhcp server event				## Displays debugging information about DHCP server events related to configuration (on a dialer interface)
+debug ip dhcp server packet				## Verify Router is Receiving and Forwarding DHCP Request Using (about packets)
+show ip dhcp server statistics				## Estatisticas | (Optional) Displays count information about server statistics and messages sent and received.
+
+
+

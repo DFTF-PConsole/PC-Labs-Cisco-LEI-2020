@@ -1,0 +1,41 @@
+Comandos & Instrucoes - Lab1 - Ex4
+
+NOTA PREVIA: Valor de X (Aula) = ? | Valor de N (Grupo) = 5
+
+
+>>> CONFIGURACAO VIRTUAL
+A. Configuracoes Router (Atribuir IP Fixo PC):
+config t						## equivalente a "configure terminal" ou "config terminal"?
+service dhcp
+ip dhcp pool FIXO					## pool separada, porque pool GRUPO-N contem o comando network (Ver Nota do Enunciado)
+host 192.168.X.10 255.255.255.0				## Endereco Aleatorio dentro da gama dos enderecos excluidos na pool GRUPO-5 | X -> N. Aleatoria da Aula
+client-name <nome>					## <nome>: ipconfig /all -> Windows IP Configuration -> Host Name
+client-identifier <Endereco MAC>			## <MAC>: ipconfig /all | Endereco MAC, ver NOTA IMPORTANTE ( [MAC no CISCO] = 01 + Endereco MAC Real >> Ex.: [MAC no CISCO] 0100.0103.8547.a2 <-equivalente-> 0001.0385.47a2 [MAC Normal])
+default-router 192.168.X.254				## X -> N. da Aula
+domain-name net-N.dei.uc.pt				## Nome do Dominio DNS | N -> 5 -> N. do Grupo (???)
+dns-server 192.168.X.31					## X -> N. da Aula
+exit
+end
+
+
+
+>>> VERIFICAR ENDERECOS ATRIBUIDOS E VALIDADE & LIMPAR TABELA DHCP & NOVA CONFIGURACAO NO PC
+A. Ver Tabela DHCP, no terminal do router:
+show ip dhcp binding
+
+
+B. Limpar Tabela DHCP
+1.no terminal do router:
+clear show ip dhcp binding *				## * significa todos os IPs (pode-se especificar um IP) | clear (...) -> Deletes an automatic address binding from the DHCP database.
+
+2. O que acontece a atribuicao fixa de endereco IP que definiu? Porque?
+(SEM CERTEZAS!?) Nao acontece nada porque 'clear show ip dhcp binding' so afeta os dinamicos (e nao os estaticos), limpando a entrada na tabela de DHCP (nao impede o ping de PC -> a Router, mas para o Router voltar a conhece-lo, executar no PC (obter nova configuracao de rede) 'ipconfig /release' e 'ipconfig /renew')
+
+
+C. Nova configuracao no PC
+1. no terminal do PC (cmd):
+ipconfig /release
+ipconfig /renew
+
+2. Qual foi o endereco Obtido? Esse valor corresponde ao que especificou?
+(SEM CERTEZAS!?) O configurado anteriormente - estaticamente. Sim.

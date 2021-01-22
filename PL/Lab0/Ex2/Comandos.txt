@@ -1,0 +1,32 @@
+Comandos & Instrucoes Lab0-Ex2
+
+NOTA PREVIA: Valor de X (Aula) = 20 | Valor de N (Grupo) = 5 | X+N = 25
+
+*** Instrucoes [Excecionalmente] Pormenorizadas (1. Aula) ***
+
+>>> Configuracao Fisica
+A. Ligar cabo Ethernet entre PC <-> Router (Interface Ethernet0)
+
+
+>>> Configuracao Virtual
+A. Configuracoes Router:
+enable
+config terminal
+interface ethernet0
+ip address 192.168.25.254 255.255.255.0		## 25 -> X+N
+no shutdown
+exit
+exit
+
+B. Configuracoes PC:
+- Ir a Painel de Controlo->Rede e Internet->Centro de Rede e Partilha->Ligacoes: ethernet->Propriedades->TCP/IPv4:
+Endereco IP: 192.168.25.100			## 25 -> X+N
+Mascara de Sub-Rede: 255.255.255.0
+Gateway Predefenido: 192.168.25.254		## 25 -> X+N
+- Ok's e Fechar's
+
+
+>>> Teste Ping
+A. Abrir Linha de Comandos do Windows (cmd)
+B. Executar o seguinte:
+ping 192.168.25.254				## Ping do PC ao Router

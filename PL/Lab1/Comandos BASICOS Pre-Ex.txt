@@ -1,0 +1,83 @@
+Comandos & Instrucoes - BASICO
+
+NOTA PREVIA: Valor de X (Aula) = ? | Valor de N (Grupo) = 5
+
+
+>>> No Inicio
+A. Ligar Cabo Azul de CONSOLA (Router <-> PC)
+B. Ligar PC em modo Windows (automaticamnte vai pra Linux)
+C. Colocar Password do PC (localizado no canto superior esquerdo) em MINUSCULAS
+D. Abriar App de terminal virtual, "minicom" no Linux, ou "hyperterminal" no Windows, definindo o seguinte:
+- escolher nome para a sessao;
+- porto: COM1;
+- configuracao:
+9600 bits per second
+8 Data bits
+No Parity
+1 Stop bits
+No flow control
+- Ligar Router, esperar pelo processo de arranque;
+- Nao entrar em modo de configuracao;
+
+
+
+>>> Identificar as Interfaces usando o comando "sh ru"
+-> ethernet0
+-> fastethernet0
+
+
+
+>>> Configuracao Fisica
+A. PC (Rede Local) <-> Router
+Ligar cabo Ethernet entre PC <-> Router (Interface Ethernet0)
+
+B. Router <-> Exterior (Lab)
+Ligar cabo Ethernet entre Tomada do Laboratorio(*1) <-> Router (Interface FastEthernet0)
+(*1) -> Verifique no respetivo bastidor secundário se a tomada está ativa, isto é, se
+existe um ‘patch chord’ a ligar a tomada que utilizou a uma tomada do bastidor.
+
+
+
+>>> Configuracao Virtual
+A. Configuracoes Router:
+enable
+config terminal
+interface ethernet0
+ip address <IP Interface Interna/Router> <Mask Rede>
+ip address <IP Interface Externa/Router> <Mask Rede>
+no shutdown
+exit
+exit
+
+B. Configuracoes PC:
+- Ir a Painel de Controlo->Rede e Internet->Centro de Rede e Partilha->Ligacoes: ethernet->Propriedades->TCP/IPv4:
+Endereco IP: <IP PC>
+Mascara de Sub-Rede: <Mask Rede>
+Gateway Predefenido: <IP Interface/Router>
+- Ok's e Fechar's
+
+
+
+>>> Teste Ping
+A. NO PC 
+1. Abrir Linha de Comandos do Windows (cmd)
+2. Executar o seguinte:
+ping <IP Interface/Router> (ou outro)
+
+B. No Terminal do Router:
+ping <IP Externo/Interno> (ou outro)
+
+
+
+>>> Outros Comandos Importantes:
+- show running-config  (ou simplesmente show running, ou ainda sh ru)
+- configure terminal (ou conf t)
+- ping <ip>
+- enable (privileged exec mode)
+- no shutdown (ativar interface)
+- exit (sair)
+- ip route <destination_network (rede.0 final)> <subnet_mask(rede final)> <default_gateway(endereço interface[lado router] a que me ligo ao router que tem contacto com a rede final)>
+- no <command> (eliminar comandos inseridos)
+- ? (Ajuda)
+- copy running-config startup-config (copiar dados de configuracao para o ficheiro de arranque, ou seja, os dados ficam guardados mesmo que o router seja reinicializado)
+

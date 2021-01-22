@@ -1,0 +1,105 @@
+Comandos & Instrucoes - Lab1 - Ex1
+
+NOTA PREVIA: Valor de X (Aula) = ? | Valor de N (Grupo) = 5
+
+
+>>> NO INICIO
+A. Ligar Cabo Azul de CONSOLA (Router <-> PC)
+B. Ligar PC em modo Windows (automaticamnte vai pra Linux)
+C. Colocar Password do PC (localizado no canto superior esquerdo) em MINUSCULAS
+D. Abriar App de terminal virtual, "minicom" no Linux, ou "hyperterminal" no Windows, definindo o seguinte:
+- escolher nome para a sessao;
+- porto: COM1;
+- configuracao:
+9600 bits per second
+8 Data bits
+No Parity
+1 Stop bits
+No flow control
+- Ligar Router, esperar pelo processo de arranque;
+- Nao entrar em modo de configuracao;
+
+
+
+>>> CONFIGURACAO FISICA
+A. PC (Rede Local) <-> Router
+Ligar cabo Ethernet entre PC <-> Router (Interface Ethernet0)
+
+
+
+>>> CONFIGURACAO VIRTUAL
+A. Configuracoes Router:
+enable
+config terminal
+interface ethernet0
+ip address 192.168.X.254 255.255.255.0			## X -> N. Aleatoria da Aula
+no shutdown
+exit
+exit
+
+config t						## equivalente a "configure terminal" ou "config terminal"?
+service dhcp
+ip dhcp pool GRUPO-5					## 5 -> N. do Grupo
+network 192.168.X.0 255.255.255.0			## X -> N. Aleatoria da Aula
+default-router 192.168.X.254				## X -> N. Aleatoria da Aula
+exit
+ip dhcp excluded-address 192.168.X.1 192.168.X.31	## X -> N. Aleatoria da Aula
+ip dhcp excluded-address 192.168.X.224 192.168.X.254	## X -> N. Aleatoria da Aula
+end
+
+B. Configuracoes PC:
+- Ir a Painel de Controlo->Rede e Internet->Centro de Rede e Partilha->Ligacoes: ethernet->Propriedades->TCP/IPv4:
+Clicar nas Opcoes: "Obter um endereço IP automaticamente" e "Obter automaticamente o endereço do servidor DNS"
+- Ok's e Fechar's
+
+
+
+>>> TESTE PING
+A. NO PC 
+1. Abrir Linha de Comandos do Windows (cmd)
+2. Executar o seguinte:
+ping 192.168.X.254					## X -> N. Aleatoria da Aula
+
+
+
+>>> INFORMACOES: Qual endereco obtido pelo PC? e Tabela DHCP no router
+A. NO PC 
+1. Abrir Linha de Comandos do Windows (cmd) e Executar o seguinte:
+ipconfig						## Ver Campo: IPv4 Address na Seccao Ethernet Adapter
+ou ipconfig /all					## Mais Detalhado
+
+B. No Terminal do Router: (Tabela de DHCP: enderecos IP, MAC, tempo de validade [lease time] e tipo)
+show ip dhcp binding					## Tabela DHCP
+
+
+
+>>> OUTROS
+A. Ver Configuracoes de Rede do PC, linha de comandos (command prompt / cmd):
+- Relevantes:
+ipconfig /all
+* Renovar a Configuracao de Rede *
+ipconfig /release					## Liberta o IP (entre outros) - Informa o DHCP Server
+ipconfig /renew						## Pede um novo IP (entre outros)
+
+- Todos (Principais):
+Options (ipconfig):
+       /?               Display this help message
+       /all             Display full configuration information.
+       /release         Release the IPv4 address for the specified adapter.
+       /release6        Release the IPv6 address for the specified adapter.
+       /renew           Renew the IPv4 address for the specified adapter.
+       /renew6          Renew the IPv6 address for the specified adapter.
+       /flushdns        Purges the DNS Resolver cache.
+       /registerdns     Refreshes all DHCP leases and re-registers DNS names
+       /displaydns      Display the contents of the DNS Resolver Cache.
+       /showclassid     Displays all the dhcp class IDs allowed for adapter.
+       /setclassid      Modifies the dhcp class id.
+       /showclassid6    Displays all the IPv6 DHCP class IDs allowed for adapter.
+       /setclassid6     Modifies the IPv6 DHCP class id.
+
+B. Ver Configuracoes do Router:
+show running 						## ou "sh ru" ou "show running-config"
+show ip dhcp binding					## (Optional) Displays a list of all bindings created on a specific DHCP server. Use the show ip dhcp binding command to display the IP addresses that have already been assigned. Verify that the address pool has not been exhausted. If necessary, re-create the pool to create a larger pool of addresses. Use the show ip dhcp binding command to display the lease expiration date and time of the IP address of the host.
+
+
+

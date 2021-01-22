@@ -1,0 +1,39 @@
+Comandos & Instrucoes Lab0-Ex1
+
+NOTA PREVIA: Valor de X (Aula) = 20 | Valor de N (Grupo) = 5 | X+N = 25
+
+
+*** Instrucoes [Excecionalmente] Pormenorizadas (1. Aula) ***
+
+>>> No Inicio (Ponto 0.)
+A. Ligar Cabo Azul de CONSOLA (Router <-> PC)
+B. Ligar PC em modo Windows (automaticamnte vai pra Linux)
+C. Colocar Password do PC (localizado no canto superior esquerdo) em MINUSCULAS
+D. Abriar App de terminal virtual, "minicom" no Linux, ou "hyperterminal" no Windows, definindo o seguinte:
+- escolher nome para a sessao;
+- porto: COM1;
+- configuracao:
+9600 bits per second
+8 Data bits
+No Parity
+1 Stop bits
+No flow control
+- Ligar Router, esperar pelo processo de arranque;
+- Nao entrar em modo de configuracao;
+
+>>> Identificar as Interfaces usando o comando "sh ru"
+-> ethernet0
+-> fastethernet0
+
+>>> Outros Comandos Importantes:
+- show running-config  (ou simplesmente show running, ou ainda sh ru)
+- configure terminal (ou conf t)
+- ping <ip>
+- enable (privileged exec mode)
+- no shutdown (ativar interface)
+- exit (sair)
+- ip route <destination_network (rede.0 final)> <subnet_mask(rede final)> <default_gateway(endereço interface[lado router] a que me ligo ao router que tem contacto com a rede final)>
+- no <command> (eliminar comandos inseridos)
+- ? (Ajuda)
+- copy running-config startup-config (copiar dados de configuracao para o ficheiro de arranque, ou seja, os dados ficam guardados mesmo que o router seja reinicializado)
+

@@ -1,0 +1,31 @@
+Comandos & Instrucoes Lab0-Ex3
+
+NOTA PREVIA: Valor de X (Aula) = 20 | Valor de N (Grupo) = 5 | X+N = 25
+
+*** Instrucoes [Excecionalmente] Pormenorizadas (1. Aula) ***
+
+>>> Configuracao Fisica
+A. Ligar cabo Ethernet entre Tomada do Laboratorio(*1) <-> Router (Interface FastEthernet0)
+(*1) -> Verifique no respetivo bastidor secundário se a tomada está ativa, isto é, se
+existe um ‘patch chord’ a ligar a tomada que utilizou a uma tomada do bastidor.
+
+
+>>> Configuracao Virtual
+A. Configuracoes Router:
+enable
+config terminal
+interface fastethernet0
+ip address 10.254.0.5 255.255.255.0	## 5 -> N. do Grupo
+no shutdown
+exit
+exit
+
+
+>>> Teste Ping (*2)
+A. No Terminal do Router:
+ping 10.254.0.254			## Ping do Router ao Servidor do Laboratorio
+
+
+(*2) -> Nao e possivel fazer ping do PC ao Servidor do Lab. porque as configuracoes do servidor sao estaticas, ou seja, nao existindo registo do IP do PC (p/ encaminhar atraves do router), o servidor nao reconhece o PC;
+Os pacotes so sao enviados numa direcao, PC -> Server Lab.
+

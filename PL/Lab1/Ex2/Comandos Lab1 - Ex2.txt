@@ -1,0 +1,46 @@
+Comandos & Instrucoes - Lab1 - Ex2
+
+NOTA PREVIA: Valor de X (Aula) = ? | Valor de N (Grupo) = 5
+
+
+>>> CONFIGURACAO VIRTUAL
+A. Configuracoes Router:
+config t						## equivalente a "configure terminal" ou "config terminal"?
+service dhcp
+ip dhcp pool GRUPO-5					## 5 -> N. do Grupo
+dns-server 192.168.X.31 10.254.0.252			## Endereco dos Servidores DNS | X -> N. Aleatoria da Aula
+domain-name net-N.dei.uc.pt				## Nome do Dominio DNS | N -> 5 -> N. do Grupo (???)
+netbios-name-server 10.1.0.253				## Ver (*1) - Outros, em baixo
+exit
+end
+
+
+
+>>> OUTROS (*1)
+A. NetBios (WINS) - Network Basic Input/Output System:
+1. INFs.:
+	Os nomes usados pelo NetBIOS não têm relação com os nomes usados em /etc/hosts/ ou os utilizados via DNS, porém é indicado utilizar a mesma denominação em ambos os 
+métodos a fim de se evitarem confusões.
+	O servidor WINS (Windows Internet Name Services) é utilizado para resolução de nomes netbios. Um exemplo de nome netbios é quando damos um nome para a máquina quando fazemos 
+a instalação do Windows. Nomes netbios nada mais é do que mapear um nome para um determinado endereço ip. Por exemplo: Mapear o nome teste01 para o endereço ip 192.168.0.1, isso 
+significa que quando digitarmos \\teste01 na maquina teste00 ele estara perguntando ao servidor WINS: Servidor WINS você sabe qual o endereço ip do teste01? Servidor WINS responde:
+O endereço ip do teste01 é 192.168.0.1 .
+Serviço de nomes:
+	A fim de iniciar as sessões ou distribuir datagramas, um aplicativo deve registrar seu nome NetBIOS usando o serviço de nomes. Os nomes NetBIOS possuem 16 octetos de 
+comprimento e variam com base na aplicação particular. Freqüentemente, o 16º octeto é usado para designar um "tipo" semelhante ao uso de portas em TCP/IP. Ele é chamado de sufixo 
+NetBIOS (leia abaixo) ou "tipo de recurso" e é usado para dizer as outras aplicações quais tipos de serviços que o sistema oferece.
+	As primitivas do serviço de nomes oferecidas pelo NetBIOS são:
+	- Adicionar nome - registra um nome NetBIOS.
+	- Adicionar nome de grupo - registra um nome de "grupo" NetBIoS.
+	- Excluir nome - cancela o registro de um nome ou o nome do grupo NetBIOS.
+	- Encontrar nome - procura um nome NetBIOS na rede.
+
+2. Comandos (Terminal do Router):
+netbios ?						## Ajuda ???
+netbios-name-server <IP> [Address IP 2, 3 (...)]	## (Optional) Specifies the NetBIOS Windows Internet Naming Service (WINS) server that is available to a Microsoft DHCP client. One address is required; however, you can specify up to eight addresses in one command line. Servers should be listed in order of preference.
+netbios-node-type <type>				## (Optional) Specifies the NetBIOS node type for a Microsoft DHCP client. Example: netbios-node-type h-node
+
+
+
+
+
